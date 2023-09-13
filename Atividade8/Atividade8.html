@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Questionário de Filme</title>
+</head>
+<body>
+    <h1>Questionário de Filme</h1>
+    <form id="questionario">
+        <label for="idade">Idade:</label>
+        <input type="number" id="idade" min="1" required><br><br>
+
+        <label for="sexo">Sexo:</label>
+        <select id="sexo" required>
+            <option value="homem">Homem</option>
+            <option value="mulher">Mulher</option>
+        </select><br><br>
+
+        <label for="opiniao">Opinião:</label>
+        <select id="opiniao" required>
+            <option value="4">Ótimo</option>
+            <option value="3">Bom</option>
+            <option value="2">Regular</option>
+            <option value="1">Péssimo</option>
+        </select><br><br>
+
+        <input type="submit" value="Enviar">
+    </form>
+
+    <h2>Resultados:</h2>
+    <p>Média das opiniões: <span id="mediaOpinioes">---</span></p>
+    <p>Idade da pessoa mais velha: <span id="idadeMaisVelha">---</span></p>
+    <p>Idade da pessoa mais nova: <span id="idadeMaisNova">---</span></p>
+    <p>Quantidade de pessoas que responderam "Péssimo": <span id="quantidadePessimo">---</span></p>
+    <p>Porcentagem das que responderam "Ótimo": <span id="porcentagemOtimo">---</span>%</p>
+    <p>Número de mulheres: <span id="mulheres">---</span></p>
+    <p>Número de homens: <span id="homens">---</span></p>
+
+    <script>
+        const respostas = [];
+        const form = document.getElementById("questionario");
+        const mediaOpinioesSpan = document.getElementById("mediaOpinioes");
+        const idadeMaisVelhaSpan = document.getElementById("idadeMaisVelha");
+        const idadeMaisNovaSpan = document.getElementById("idadeMaisNova");
+        const quantidadePessimoSpan = document.getElementById("quantidadePessimo");
+        const porcentagemOtimoSpan = document.getElementById("porcentagemOtimo");
+        const mulheresSpan = document.getElementById("mulheres");
+        const homensSpan = document.getElementById("homens");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const idade = parseInt(document.getElementById("idade").value);
+            const sexo = document.getElementById("sexo").value;
+            const opiniao = parseInt(document.getElementById("opiniao").value);
+
+            respostas.push({ idade, sexo, opiniao });
+
+            calcularEstatisticas();
+            form.reset();
+        });
+
+        function calcularEstatisticas() {
+            const totalOpinioes = respostas.reduce((acumulador, resposta) => acumulador + resposta.opiniao, 0);
+            const mediaOpinioes = totalOpinioes / respostas.length;
+            const idades = respostas.map(resposta => resposta.idade);
+            const idadeMaisVelha = Math.max(...idades);
+            const idadeMaisNova = Math.min(...idades);
+            const quantidadePessimo = respostas.filter(resposta => resposta.opiniao === 1).length;
+            const quantidadeOtimo = respostas.filter(resposta => resposta.opiniao === 4).length;
+            const porcentagemOtimo = (quantidadeOtimo / respostas.length) * 100;
+            const mulheres = respostas.filter(resposta => resposta.sexo === "mulher").length;
+            const homens = respostas.filter(resposta => resposta.sexo === "homem").length;
+
+            mediaOpinioesSpan.textContent = mediaOpinioes.toFixed(2);
+            idadeMaisVelhaSpan.textContent = idadeMaisVelha;
+            idadeMaisNovaSpan.textContent = idadeMaisNova;
+            quantidadePessimoSpan.textContent = quantidadePessimo;
+            porcentagemOtimoSpan.textContent = porcentagemOtimo.toFixed(2);
+            mulheresSpan.textContent = mulheres;
+            homensSpan.textContent = homens;
+        }
+    </script>
+</body>
