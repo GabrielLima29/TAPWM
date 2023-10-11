@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Soma e multilicaçaõ de valores </title>
+</head>
+<body>
+    <h1> Encontre a soma e a multiplicação de seus valores</h1>
+      
+    <label for="numero1">Número 1:</label>
+    <input type="number" id="numero1" step="any" required><br>
+    
+    <label for="numero2">Número 2:</label>
+    <input type="number" id="numero2" step="any" required><br>
+    
+    <label for="numero3">Número 3:</label>
+    <input type="number" id="numero3" step="any" required><br>
+    
+    
+    <button onclick="somadosValores()">A soma dos valores:</button>
+    <button onclick="multiplicacaodosValores1()">O valor ao quadrado do Número 1:</button>
+    <button onclick="multiplicacaodosValores2()">O valor ao quadrado do Número 2:</button>
+
+    <p id="resultado"></p>
+
+
+    </body>
+    <script>
+        function somadosValores(){
+            const numero1 = parseFloat(document.getElementById("numero1").value);
+            const numero2 = parseFloat(document.getElementById("numero2").value);
+            const numero3 = parseFloat(document.getElementById("numero3").value);
+
+            var soma = Math.max(numero1 + numero2 + numero3)
+            
+            document.getElementById("resultado").textContent = `A soma é: ${soma}`;
+        }
+
+        function quadrado1(){
+            
+        }
+    
+    </script>
