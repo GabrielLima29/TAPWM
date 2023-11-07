@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Escolha seu Curso</title>
+</head>
+<body>
+    <h1>Escolha seu Curso</h1>
+    
+    <label for="curso">Selecione um curso:</label>
+    <select id="curso">
+        <option value="curso1">TAP</option>
+        <option value="curso2">TAPWM</option>
+        <option value="curso3">BD</option>
+    </select>
+
+    <button onclick="mostrarInformacoesCurso()">Ver Informacoes do Curso</button>
+
+    <script>
+        function mostrarInformacoesCurso() {
+            const cursoSelecionado = document.getElementById("curso").value;
+            const confirmacao = confirm("Deseja abrir informacoes do curso: " + cursoSelecionado + "?");
+            
+            if (confirmacao) {
+                let informacoesCurso = "";
+                switch (cursoSelecionado) {
+                    case "curso1":
+                        informacoesCurso = "Informacoes do TAP: Aulas na quarta-feira das 14:50 ate 16:30";
+                        break;
+                    case "curso2":
+                        informacoesCurso = "Informacoes do TAPWM: Aulas na quarta-feira das 16:40 ate 18:20";
+                        break;
+                    case "curso3":
+                        informacoesCurso = "Informacoes do BD: Aulas na quarta-feira das 13:10 ate 14:40";
+                        break;
+                    default:
+                        informacoesCurso = "Curso nao encontrado.";
+                }
+
+                const novaJanela = window.open("", "Curso", "width=400, height=300");
+                novaJanela.document.write("<h1>Informacoes do Curso</h1><p>" + informacoesCurso + "</p>");
+            }
+        }
+    </script>
+</body>
+</html>

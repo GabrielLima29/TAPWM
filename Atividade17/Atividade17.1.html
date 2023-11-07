@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario de Validacao</title>
+</head>
+<body>
+    <h1>Formulario de Validacao</h1>
+    
+    <form name="meuForm" onsubmit="return validarFormulario()">
+        <p>
+        <label for="nome">Nome (minimo 10 caracteres):</label>
+        <input type="text" name="nome" required>
+        </p>
+
+        <p>
+        <label for="email">Email (deve conter '@' e '.'): </label>
+        <input type="email" name="email" required>
+        </p>
+
+        <p>
+        <label for="comentario">Comentario (minimo 20 caracteres):</label>
+        <textarea name="comentario" required></textarea>
+        </p>
+         
+        <p>
+        <label>Pesquisa (obrigatorio):</label>
+        <input type="radio" name="pesquisa" value="sim" required> Sim
+        <input type="radio" name="pesquisa" value="nao" required> Nao
+        </p>
+
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        function validarFormulario() {
+            const nome = document.meuForm.elements["nome"].value;
+            const email = document.meuForm.elements["email"].value;
+            const comentario = document.meuForm.elements["comentario"].value;
+            const pesquisa = document.meuForm.elements["pesquisa"].value;
+
+            if (nome.length < 10) {
+                alert("Nome deve ter no minimo 10 caracteres.");
+                return false;
+            }
+
+            if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
+                alert("Email deve conter '@' e '.'.");
+                return false;
+            }
+
+            if (comentario.length < 20) {
+                alert("Comentario deve ter no minimo 20 caracteres.");
+                return false;
+            }
+
+            if (pesquisa === "nao") {
+                alert("Que bom que voce voltou a visitar esta pagina!");
+            } else {
+                alert("Volte sempre a esta pagina!");
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
