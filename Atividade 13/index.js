@@ -1,4 +1,4 @@
-//1) metodo construtor
+
 function Retangulo(x, y){
     this.x = x;
     this.y = y;
