@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscricao no Torneio de Volei</title>
+</head>
+<body>
+    <h1>Inscricao no Torneio de Volei</h1>
+    <form id="formulario">
+        <label for="nome">Nome da pessoa:</label>
+        <input type="text" id="nome" name="nome" required>
+        <br>
+        <label for="data_nascimento">Data de nascimento:</label>
+        <input type="date" id="data_nascimento" name="data_nascimento" required>
+        <br>
+        <label for="matriculado">Matriculado regularmente:</label>
+        <input type="radio" id="sim" name="matriculado" value="sim" required>
+        <label for="sim">Sim</label>
+        <input type="radio" id="nao" name="matriculado" value="nao">
+        <label for="nao">Nao</label>
+        <br>
+        <label for="endereco">Endereco:</label>
+        <input type="text" id="endereco" name="endereco" required>
+        <br>
+        <button type="button" onclick="criarObjeto()">Inscrever-se</button>
+    </form>
+    <script>
+        function validarIdade(data_nascimento) {
+            const idade_minima = 7;
+            const idade_maxima = 17;
+            const data_atual = new Date();
+            const idade = data_atual.getFullYear() - data_nascimento.getFullYear();
+            const mes = data_atual.getMonth() - data_nascimento.getMonth();
+            return idade >= idade_minima && idade <= idade_maxima && mes >= 0;
+        }
+
+        function criarObjeto() {
+            const nome = document.getElementById("nome").value;
+            const data_nascimento = new Date(document.getElementById("data_nascimento").value);
+            const matriculado = document.getElementById("sim").checked;
+            const endereco = document.getElementById("endereco").value;
+
+            if (validarIdade(data_nascimento)) {
+                if (matriculado) {
+                    const inscrito = {
+                        nome: nome,
+                        data_nascimento: data_nascimento,
+                        matriculado: matriculado,
+                        endereco: endereco
+                    };
+                    alert("Nome da pessoa: " + inscrito.nome + "\nData de Nascimento:  " + inscrito.data_nascimento + "\nEndereco: " + inscrito.endereco + "\n Esta registrado no torneio!");
+                } else {
+                    alert("Nome da pessoa: " + nome + "\nData de Nascimento: " + data_nascimento + "\nEndereco: " + endereco + "\nNao esta inscrito no torneio porque nao atende aos requisitos");
+                }
+            } else {
+                alert("Nome da pessoa: " + nome + "\nData de Nascimento " + data_nascimento + "\nEndereco " + endereco + "\nNao esta inscrito no torneio porque nao atende aos requisitos de idade!");
+            }
+        }
+    </script>
+</body>
+</html>
